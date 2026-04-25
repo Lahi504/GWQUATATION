@@ -1,87 +1,317 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Golden Whisk Quotation - Elegant Card Design</title>
-<style>
-*{box-sizing:border-box}
-body{margin:0;padding:14px;font-family:Arial,sans-serif;background:#1a1a1a}
-.toolbar{max-width:210mm;margin:0 auto 12px;display:flex;gap:10px;justify-content:center}
-button{padding:10px 16px;border-radius:12px;border:1px solid #d4af37;background:#111;color:#d4af37}
-.page{width:210mm;min-height:297mm;margin:auto;background:#fff;border-radius:22px;overflow:hidden;box-shadow:0 0 24px rgba(0,0,0,.3)}
-.header{padding:28px;background:linear-gradient(135deg,#111,#2b2b2b);color:#d4af37}
-.brand{font-size:46px;font-weight:700}
-.sub{font-size:17px;margin-top:6px}
-.quote{margin-top:18px;font-size:42px;letter-spacing:3px;color:#fff}
-.content{padding:24px;background:linear-gradient(180deg,#fffdf8,#fff7e8)}
-.topcards{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-.card{background:#fff;border:2px solid #efd48a;border-radius:18px;padding:18px;box-shadow:0 4px 12px rgba(0,0,0,.06)}
-.label{font-size:13px;color:#b8860b;font-weight:700;margin-top:6px}
-input,textarea{width:100%;padding:11px;border:1px solid #ead8a0;border-radius:10px;margin-top:6px}
-.tablewrap{margin-top:22px;background:#fff;border-radius:18px;overflow:hidden;border:2px solid #efd48a}
-table{width:100%;border-collapse:collapse} th{background:#111;color:#d4af37;padding:12px} td{padding:10px;border-top:1px solid #f0e1b2}
-.summary{margin-top:22px;display:flex;justify-content:flex-end}
-.totalbox{width:320px;background:#111;color:#d4af37;border-radius:18px;padding:18px}
-.totalrow{display:flex;justify-content:space-between;font-size:18px}
-.big{font-size:30px;font-weight:700;margin-top:8px}
-.note{margin-top:28px;padding:16px;border-left:5px solid #d4af37;background:#fff;border-radius:12px}
-@media(max-width:768px){.page{width:100%}.topcards{grid-template-columns:1fr}.brand{font-size:34px}.quote{font-size:30px}}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GOLDN WHISK - Quotation Management</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 0;
+            background-color: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #4a412a;
+            background-color: #fcfaf2;
+        }
+
+        .container {
+            width: 210mm;
+            min-height: 297mm;
+            margin: auto;
+            background: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            position: relative;
+            padding-bottom: 50px;
+        }
+
+        /* Gold Header Accent */
+        header {
+            background: linear-gradient(135deg, #d4af37 0%, #f1e0a2 50%, #b8860b 100%);
+            height: 15px;
+            width: 100%;
+        }
+
+        .brand-section {
+            padding: 30px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #f1e0a2;
+        }
+
+        .brand-info h1 {
+            font-family: 'Georgia', serif;
+            font-size: 28pt;
+            margin: 0;
+            color: #b8860b;
+            letter-spacing: 1px;
+        }
+
+        .brand-info p {
+            margin: 5px 0;
+            font-size: 11pt;
+            font-style: italic;
+            color: #8a7b52;
+        }
+
+        .logo-placeholder {
+            width: 120px;
+            height: 120px;
+            border: 2px dashed #d4af37;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 9pt;
+            color: #d4af37;
+        }
+
+        .form-section {
+            padding: 20px 50px;
+        }
+
+        .section-title {
+            font-size: 14pt;
+            color: #b8860b;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .grid {
+            display: table;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .grid-row {
+            display: table-row;
+        }
+
+        .grid-col {
+            display: table-cell;
+            padding: 8px;
+            width: 50%;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            font-size: 9pt;
+            margin-bottom: 4px;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #e0d8b0;
+            border-radius: 4px;
+            font-size: 10pt;
+            box-sizing: border-box;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th {
+            background-color: #f9f6e8;
+            color: #b8860b;
+            text-align: left;
+            padding: 10px;
+            font-size: 10pt;
+            border-bottom: 2px solid #d4af37;
+        }
+
+        td {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .total-section {
+            float: right;
+            width: 300px;
+            margin-top: 20px;
+        }
+
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 0;
+            font-size: 11pt;
+        }
+
+        .grand-total {
+            border-top: 2px solid #d4af37;
+            margin-top: 10px;
+            padding-top: 10px;
+            font-weight: bold;
+            font-size: 13pt;
+            color: #b8860b;
+        }
+
+        footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            padding: 20px 0;
+            background-color: #f9f6e8;
+            text-align: center;
+            font-size: 9pt;
+            border-top: 1px solid #f1e0a2;
+        }
+
+        .footer-contacts {
+            margin-top: 5px;
+            color: #8a7b52;
+        }
+
+        .footer-contacts span {
+            margin: 0 10px;
+        }
+
+        .btn-container {
+            text-align: center;
+            padding: 30px;
+        }
+
+        .btn {
+            background: #b8860b;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+            margin: 0 10px;
+        }
+    </style>
 </head>
 <body>
-<div class="toolbar"><button onclick="saveData()">Save</button><button onclick="window.print()">Print / PDF</button></div>
-<div class="page">
-<div class="header">
-<div class="brand">Golden Whisk</div>
-<div class="sub">Luxury Cakes & Custom Orders • D. Anthony</div>
-<div class="quote">QUOTATION</div>
-</div>
-<div class="content">
-<div class="topcards">
-<div class="card">
-<div class="label">CLIENT DETAILS</div>
-<input id="client" placeholder="Client Name">
-<textarea id="address" rows="3" placeholder="Address"></textarea>
-<input id="phone" placeholder="Phone Number">
-</div>
-<div class="card">
-<div class="label">QUOTE INFO</div>
-<input id="qno" placeholder="Quotation No">
-<input id="qdate" placeholder="Quotation Date">
-<input id="valid" placeholder="Valid Until">
-</div>
-</div>
-<div class="tablewrap">
-<table>
-<thead><tr><th>Description</th><th>Qty</th><th>Price</th><th>Total</th></tr></thead>
-<tbody>
-<tr><td><input id="d1" value="Birthday Cake Package"></td><td><input id="q1" type="number" value="1" oninput="calc()"></td><td><input id="p1" type="number" value="6500" oninput="calc()"></td><td><input id="t1" readonly></td></tr>
-<tr><td><input id="d2" value="Cupcake Gift Box"></td><td><input id="q2" type="number" value="2" oninput="calc()"></td><td><input id="p2" type="number" value="2000" oninput="calc()"></td><td><input id="t2" readonly></td></tr>
-<tr><td><input id="d3" value="Delivery"></td><td><input id="q3" type="number" value="1" oninput="calc()"></td><td><input id="p3" type="number" value="500" oninput="calc()"></td><td><input id="t3" readonly></td></tr>
-</tbody>
-</table>
-</div>
-<div class="summary"><div class="totalbox"><div class="totalrow"><span>Total Quotation</span><span>LKR</span></div><div class="big" id="grand">0.00</div></div></div>
-<div style="margin-top:26px;display:flex;justify-content:space-between;align-items:flex-end;gap:20px;">
-<div style="flex:1;padding:16px;background:#fff;border:1px solid #efd48a;border-radius:14px;">
-<div style="font-size:14px;color:#777;">Prepared for customer approval</div>
-<input id="signatureName" value="D. Anthony" style="margin-top:18px;width:100%;border:none;border-bottom:1px solid #ccc;font-family:cursive;font-size:34px;color:#222;background:transparent;outline:none;" oninput="saveData()">
-<div style="border-top:1px solid #999;margin-top:6px;padding-top:6px;font-size:14px;">D. Anthony<br><span style="color:#777;">Founder / Authorized Signatory</span></div>
-</div>
-<div style="width:130px;height:130px;border:2px solid #d4af37;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#fff;box-shadow:0 4px 10px rgba(0,0,0,.08);">
-<div style="text-align:center;color:#b8860b;font-weight:700;line-height:1.4;">Golden<br>Whisk<br><span style="font-size:12px;">Official Seal</span></div>
-</div>
-</div>
-<div class="note">This quotation is valid for 7 days and may change based on final customization requirements.</div>
-</div>
-</div>
-<script>
-function line(q,p,t){const v=(+document.getElementById(q).value||0)*(+document.getElementById(p).value||0);document.getElementById(t).value=v.toFixed(2);return v}
-function calc(){const g=line('q1','p1','t1')+line('q2','p2','t2')+line('q3','p3','t3');document.getElementById('grand').innerText=g.toFixed(2);saveData()}
-function saveData(){const d={};document.querySelectorAll('input,textarea').forEach(e=>d[e.id]=e.value);localStorage.setItem('gw_quote_alt',JSON.stringify(d))}
-function load(){const d=JSON.parse(localStorage.getItem('gw_quote_alt')||'{}');Object.keys(d).forEach(k=>{const e=document.getElementById(k);if(e)e.value=d[k]});calc()}
-window.onload=load;
-</script>
+    <div class="container">
+        <header></header>
+        
+        <div class="brand-section">
+            <div class="brand-info">
+                <h1>GOLDN WHISK</h1>
+                <p>Cake Studio For All Celebrations</p>
+                <p>Freshly baked with love</p>
+            </div>
+            <div class="logo-placeholder">
+                [ LOGO AREA ]<br>Golden Whisk
+            </div>
+        </div>
+
+        <div class="form-section">
+            <div class="section-title">Quotation Details</div>
+            <div class="grid">
+                <div class="grid-row">
+                    <div class="grid-col">
+                        <label>Quotation Number</label>
+                        <input type="text" value="GW-2026-001">
+                    </div>
+                    <div class="grid-col">
+                        <label>Date</label>
+                        <input type="date">
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-title">Customer Information</div>
+            <div class="grid">
+                <div class="grid-row">
+                    <div class="grid-col">
+                        <label>Customer Name</label>
+                        <input type="text" placeholder="Enter name">
+                    </div>
+                    <div class="grid-col">
+                        <label>Contact Number</label>
+                        <input type="text" placeholder="Enter phone">
+                    </div>
+                </div>
+                <div class="grid-row">
+                    <div class="grid-col">
+                        <label>Event Date</label>
+                        <input type="date">
+                    </div>
+                    <div class="grid-col">
+                        <label>Delivery/Pickup Venue</label>
+                        <input type="text" placeholder="Address">
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-title">Itemized Requirements</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 50%;">Item Description</th>
+                        <th>Quantity</th>
+                        <th>Unit Price (LKR)</th>
+                        <th>Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input type="text" placeholder="e.g. Custom 2-Tier Chocolate Cake"></td>
+                        <td><input type="number" value="1"></td>
+                        <td><input type="number" placeholder="0.00"></td>
+                        <td><strong>0.00</strong></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" placeholder="e.g. Red Velvet Cupcakes (Set of 12)"></td>
+                        <td><input type="number" value="1"></td>
+                        <td><input type="number" placeholder="0.00"></td>
+                        <td><strong>0.00</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div style="overflow: hidden;">
+                <div class="total-section">
+                    <div class="total-row">
+                        <span>Subtotal</span>
+                        <span>LKR 0.00</span>
+                    </div>
+                    <div class="total-row">
+                        <span>Delivery Fee</span>
+                        <span><input type="number" style="width: 80px; text-align: right;" value="0"></span>
+                    </div>
+                    <div class="total-row grand-total">
+                        <span>Total Amount</span>
+                        <span>LKR 0.00</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-title" style="margin-top: 40px;">Special Notes / Design Instructions</div>
+            <textarea rows="4" placeholder="Mention theme colors, flavors, or specific text for the cake..."></textarea>
+        </div>
+
+        <div class="btn-container">
+            <button class="btn">Generate Professional PDF</button>
+            <button class="btn" style="background: #e0d8b0; color: #4a412a;">Save Draft</button>
+        </div>
+
+        <footer>
+            <strong>GOLDN WHISK</strong> - Founder: D. Anthony
+            <div class="footer-contacts">
+                <span>📞 077 724 3493</span> | 
+                <span>🌐 golden_whisk.lk</span> | 
+                <span>📱 @golden_whisk.lk</span>
+            </div>
+        </footer>
+    </div>
 </body>
 </html>
