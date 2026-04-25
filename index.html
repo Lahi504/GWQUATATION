@@ -3,86 +3,139 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Golden Whisk - Quotation</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <title>Golden Whisk - Bespoke Quotation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;0,900;1,400&display=swap" rel="stylesheet">
     <style>
         :root {
-            --gold: #d4af37;
-            --dark-gold: #b8860b;
-            --light-cream: #fffdf5;
-            --text-gray: #444;
+            --gold: #c5a059;
+            --dark-gold: #8e6d2f;
+            --light-cream: #fdfaf4;
+            --border-color: #d4af37;
+            --text-main: #2c2c2c;
         }
 
-        /* General Styling */
         body {
-            font-family: 'Lato', sans-serif;
-            background-color: #e0e0e0;
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f0f0f0;
             margin: 0;
-            padding: 40px 20px;
-            color: var(--text-gray);
+            padding: 20px;
+            color: var(--text-main);
+            -webkit-print-color-adjust: exact;
         }
 
-        /* The Paper Sheet */
+        /* Controls */
+        .controls {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 1000;
+        }
+
+        .btn {
+            padding: 12px 20px;
+            border: 1px solid var(--gold);
+            background: white;
+            color: var(--dark-gold);
+            cursor: pointer;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 11px;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: var(--gold);
+            color: white;
+        }
+
+        /* A4 Paper Styling */
         .paper {
             background: white;
-            width: 850px;
+            width: 210mm;
+            min-height: 297mm;
             margin: 0 auto;
-            padding: 70px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-            min-height: 1100px;
-            position: relative;
-            display: flex;
-            flex-direction: column;
+            padding: 45px;
             box-sizing: border-box;
+            position: relative;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            border: 1px solid #eee;
+            overflow: hidden;
         }
 
-        /* Branding Header */
+        /* Luxury Border Frame */
+        .paper::before {
+            content: "";
+            position: absolute;
+            top: 15px; bottom: 15px; left: 15px; right: 15px;
+            border: 1px solid var(--gold);
+            pointer-events: none;
+        }
+
+        .paper::after {
+            content: "";
+            position: absolute;
+            top: 20px; bottom: 20px; left: 20px; right: 20px;
+            border: 2px solid var(--gold);
+            pointer-events: none;
+        }
+
+        /* Header Area */
         .header {
             text-align: center;
-            border-bottom: 2px solid var(--gold);
-            padding-bottom: 30px;
             margin-bottom: 40px;
+            position: relative;
         }
 
         .logo {
-            width: 150px;
-            height: auto;
-            margin-bottom: 10px;
+            width: 120px;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
         }
 
         h1 {
             font-family: 'Playfair Display', serif;
+            font-size: 38px;
+            margin: 15px 0 5px 0;
+            letter-spacing: 5px;
             color: var(--dark-gold);
-            font-size: 2.5em;
-            letter-spacing: 8px;
-            margin: 10px 0;
-            font-weight: 700;
+            text-transform: uppercase;
         }
 
-        /* Client & Invoice Info */
+        .tagline {
+            font-style: italic;
+            font-size: 13px;
+            letter-spacing: 3px;
+            color: #777;
+            text-transform: uppercase;
+        }
+
+        /* Info Section */
         .info-section {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 50px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            margin-bottom: 40px;
+            padding: 0 10px;
         }
 
         .info-box strong {
-            color: var(--dark-gold);
+            font-size: 10px;
+            letter-spacing: 2px;
             text-transform: uppercase;
-            font-size: 0.85em;
+            color: var(--gold);
+            display: block;
+            margin-bottom: 5px;
         }
 
         .editable {
-            border-bottom: 1px dashed #ccc;
-            padding: 4px;
-            min-width: 30px;
-            display: inline-block;
             outline: none;
-            transition: all 0.2s;
+            border-bottom: 1px solid transparent;
+            transition: 0.2s;
         }
 
         .editable:focus {
-            border-bottom: 2px solid var(--gold);
+            border-bottom: 1px solid var(--gold);
             background: var(--light-cream);
         }
 
@@ -90,228 +143,238 @@
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
         }
 
         th {
-            background-color: var(--gold);
-            color: white;
             font-family: 'Playfair Display', serif;
-            padding: 15px;
-            text-align: left;
             text-transform: uppercase;
+            font-size: 12px;
             letter-spacing: 1px;
+            padding: 15px;
+            border-bottom: 2px solid var(--gold);
+            color: var(--dark-gold);
+            text-align: left;
         }
 
         td {
-            border-bottom: 1px solid #f0f0f0;
-            padding: 18px 15px;
-            vertical-align: top;
+            padding: 15px;
+            border-bottom: 1px solid #f9f9f9;
+            font-size: 13px;
         }
 
         .col-total {
-            font-weight: bold;
             text-align: right;
-            color: #222;
+            font-weight: 600;
         }
 
-        /* Totals Area */
-        .grand-total-wrapper {
+        /* Grand Total Area */
+        .total-container {
+            float: right;
+            width: 300px;
             text-align: right;
-            font-size: 1.8em;
-            color: var(--dark-gold);
-            margin-top: 20px;
-            border-top: 3px double var(--gold);
-            padding-top: 15px;
-            font-family: 'Playfair Display', serif;
-            font-weight: bold;
+            margin-top: 10px;
         }
 
-        /* Terms & Signatures */
-        .terms-section {
-            margin-top: 50px;
-            font-size: 0.9em;
-            line-height: 1.6;
-        }
-
-        .terms-section h3 {
-            color: var(--dark-gold);
-            border-bottom: 1px solid var(--gold);
-            display: inline-block;
-            margin-bottom: 10px;
-        }
-
-        .signature-section {
-            margin-top: auto;
+        .total-row {
             display: flex;
             justify-content: space-between;
-            padding-top: 60px;
+            padding: 10px 0;
+            font-size: 14px;
         }
 
-        .sig-box {
-            width: 40%;
-            border-top: 1px solid #444;
-            text-align: center;
-            padding-top: 10px;
+        .grand-total {
+            border-top: 2px solid var(--gold);
+            margin-top: 10px;
+            padding-top: 15px;
             font-family: 'Playfair Display', serif;
-            font-style: italic;
+            font-size: 24px;
+            font-weight: 900;
+            color: var(--dark-gold);
         }
 
-        /* Control Buttons (Floating) */
-        .controls {
-            position: fixed;
-            top: 30px;
-            right: 30px;
+        /* Footer & Signatures */
+        .footer-area {
+            margin-top: 60px;
+            clear: both;
+        }
+
+        .terms {
+            font-size: 11px;
+            color: #888;
+            line-height: 1.8;
+            margin-bottom: 40px;
+        }
+
+        .signatures {
             display: flex;
-            flex-direction: column;
-            gap: 15px;
-            z-index: 1000;
+            justify-content: space-between;
+            margin-top: 50px;
         }
 
-        .btn {
-            padding: 14px 25px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-            color: white;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            transition: transform 0.2s, background 0.2s;
-            font-family: 'Lato', sans-serif;
+        .sig-line {
+            width: 200px;
+            border-top: 1px solid var(--gold);
+            text-align: center;
+            padding-top: 8px;
+            font-size: 10px;
             text-transform: uppercase;
-            font-size: 0.8em;
+            letter-spacing: 1px;
+            color: #555;
         }
 
-        .btn-download { background: #222; }
-        .btn-add { background: var(--dark-gold); }
-        .btn:hover { transform: scale(1.05); }
-
-        /* Print Mode Optimizations */
+        /* Print Scaling Logic */
         @media print {
-            .controls { display: none; }
-            body { background: white; padding: 0; }
-            .paper { 
-                box-shadow: none; 
-                margin: 0; 
-                width: 100%; 
-                padding: 40px; 
-                min-height: 100vh;
+            @page {
+                size: A4;
+                margin: 0;
             }
-            .editable { border-bottom: none; }
+            body {
+                background: white;
+                padding: 0;
+            }
+            .controls {
+                display: none;
+            }
+            .paper {
+                box-shadow: none;
+                border: none;
+                width: 210mm;
+                height: 297mm;
+                /* This forces everything to scale down if it overflows */
+                transform: scale(0.98); 
+                transform-origin: top center;
+            }
+            .paper::before, .paper::after {
+                print-color-adjust: exact;
+            }
         }
     </style>
 </head>
 <body>
 
 <div class="controls">
-    <button class="btn btn-download" onclick="window.print()">Download as PDF</button>
-    <button class="btn btn-add" onclick="addRow()">+ Add New Item</button>
+    <button class="btn" onclick="addRow()">+ Add Item</button>
+    <button class="btn" style="background: var(--gold); color: white;" onclick="window.print()">Download PDF</button>
 </div>
 
 <div class="paper">
     <div class="header">
-        <img src="C:\Users\lahir\Desktop\New folder\WhatsApp_Image_2026-02-14_at_17.52.57-removebg-preview.png" alt="Golden Whisk Logo" class="logo">
-        <h1>QUOTATION</h1>
-        <p style="font-style: italic; color: var(--dark-gold); letter-spacing: 2px;">Bespoke Cakes & Fine Confections</p>
+        <img src="C:\Users\lahir\Desktop\New folder\WhatsApp_Image_2026-02-14_at_17.52.57-removebg-preview.png" alt="Golden Whisk" class="logo">
+        <h1>Quotation</h1>
+        <div class="tagline">Bespoke Cakes & Fine Confections</div>
     </div>
 
     <div class="info-section">
         <div class="info-box">
-            <strong>Prepared For</strong><br>
-            <div class="editable" contenteditable="true" style="width: 280px; font-size: 1.1em;">[Customer Name]</div><br>
-            <div class="editable" contenteditable="true" style="width: 280px; font-size: 0.9em;">[Phone / Event Location]</div>
+            <strong>Client Details</strong>
+            <div class="editable" contenteditable="true" style="font-family: 'Playfair Display'; font-size: 18px;">[Customer Name]</div>
+            <div class="editable" contenteditable="true" style="font-size: 12px; color: #777;">[Phone Number / Event Venue]</div>
         </div>
         <div class="info-box" style="text-align: right;">
-            <strong>Quote Details</strong><br>
-            Date: <span class="editable" contenteditable="true">February 14, 2026</span><br>
-            Quote No: <span class="editable" contenteditable="true">GW-2026-001</span>
+            <strong>Reference</strong>
+            <div style="font-size: 13px;">Date: <span class="editable" contenteditable="true">April 25, 2026</span></div>
+            <div style="font-size: 13px;">Quote #: <span class="editable" contenteditable="true">GW-2026-042</span></div>
         </div>
     </div>
 
     <table id="quoteTable">
         <thead>
             <tr>
-                <th>Description</th>
-                <th style="width: 60px;">Qty</th>
-                <th style="width: 120px;">Price (Rs)</th>
-                <th style="width: 120px; text-align: right;">Total (Rs)</th>
+                <th style="width: 50%;">Description</th>
+                <th style="text-align: center;">Qty</th>
+                <th style="text-align: right;">Unit Price</th>
+                <th style="text-align: right;">Total</th>
             </tr>
         </thead>
         <tbody id="tableBody">
             <tr class="item-row">
-                <td><div class="editable" contenteditable="true" style="width: 100%; font-weight: bold;">Custom Signature Cake</div><div class="editable" contenteditable="true" style="width: 100%; font-size: 0.85em; color: #666;">Enter flavor and size details here...</div></td>
-                <td><div class="editable qty" contenteditable="true">1</div></td>
-                <td><div class="editable price" contenteditable="true">0.00</div></td>
+                <td>
+                    <div class="editable" contenteditable="true" style="font-weight: 600;">Custom Celebration Cake</div>
+                    <div class="editable" contenteditable="true" style="font-size: 11px; color: #888;">Flavors, tiers, and theme details...</div>
+                </td>
+                <td style="text-align: center;"><div class="editable qty" contenteditable="true">1</div></td>
+                <td style="text-align: right;"><div class="editable price" contenteditable="true">0.00</div></td>
                 <td class="col-total">0.00</td>
             </tr>
         </tbody>
     </table>
 
-    <div class="grand-total-wrapper">
-        GRAND TOTAL: Rs<span id="grandTotal">0.00</span>
+    <div class="total-container">
+        <div class="total-row">
+            <span>Subtotal</span>
+            <span id="subTotal">Rs 0.00</span>
+        </div>
+        <div class="total-row">
+            <span>Delivery Fee</span>
+            <span class="editable" contenteditable="true">0.00</span>
+        </div>
+        <div class="total-row grand-total">
+            <span>Amount Due</span>
+            <span id="grandTotal">Rs 0.00</span>
+        </div>
     </div>
 
-    <div class="terms-section">
-        <h3>Terms & Conditions</h3>
-        <p>
-            • A <strong>50% non-refundable deposit</strong> is required to secure your booking date.<br>
-            • Final balance must be settled <strong>7 days</strong> before the event.<br>
-            • Product may contain or come into contact with <strong>dairy, wheat, or nuts</strong>.
-        </p>
-    </div>
+    <div class="footer-area">
+        <div class="terms">
+            <strong>Terms of Service:</strong><br>
+            • 50% deposit required to confirm dates. • Remaining balance due 7 days prior to delivery.<br>
+            • All cakes are handmade; slight variations may occur. • Contains Gluten, Dairy, and Eggs.
+        </div>
 
-    <div class="signature-section">
-        <div class="sig-box">
-            <span style="font-weight: bold;">Golden Whisk</span><br>
-            <span style="font-size: 0.8em; color: #888;">Authorized Representative</span><br>
-            <span style="font-size: 0.8em; color: #888;">D Anthony</span>
+        <div class="signatures">
+            <div>
+                <div style="font-family: 'Playfair Display'; font-style: italic; margin-bottom: 5px;">D. Anthony</div>
+                <div class="sig-line">On behalf of Golden Whisk</div>
+            </div>
+            <div>
+                <div style="height: 20px;"></div>
+                <div class="sig-line">Client Acceptance</div>
+            </div>
         </div>
-        <div class="sig-box">
-            <span style="font-weight: bold;">Client Acceptance</span><br>
-            <span style="font-size: 0.8em; color: #888;">Signature & Date</span>
-        </div>
+    </div>
+    
+    <div style="position: absolute; bottom: 35px; width: calc(100% - 90px); text-align: center; font-size: 9px; color: var(--gold); letter-spacing: 1px;">
+        INSTAGRAM: GOLDEN_WHISK.LK • WHATSAPP: 077 724 3493
     </div>
 </div>
 
 <script>
-    // Logic to calculate math automatically
     function updateTotals() {
-        let grandTotal = 0;
+        let subtotal = 0;
         const rows = document.querySelectorAll('.item-row');
         
         rows.forEach(row => {
-            // Clean text input to extract numbers only
-            const qtyText = row.querySelector('.qty').innerText.replace(/[^0-9.]/g, '');
-            const priceText = row.querySelector('.price').innerText.replace(/[^0-9.]/g, '');
-            
-            const qty = parseFloat(qtyText) || 0;
-            const price = parseFloat(priceText) || 0;
+            const qty = parseFloat(row.querySelector('.qty').innerText.replace(/[^\d.-]/g, '')) || 0;
+            const price = parseFloat(row.querySelector('.price').innerText.replace(/[^\d.-]/g, '')) || 0;
             const total = qty * price;
             
-            row.querySelector('.col-total').innerText = total.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
-            grandTotal += total;
+            row.querySelector('.col-total').innerText = total.toLocaleString('en-LK', {minimumFractionDigits: 2});
+            subtotal += total;
         });
         
-        document.getElementById('grandTotal').innerText = grandTotal.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+        document.getElementById('subTotal').innerText = "Rs " + subtotal.toLocaleString('en-LK', {minimumFractionDigits: 2});
+        // You can add delivery logic here if needed, or just let users edit the Grand Total
+        document.getElementById('grandTotal').innerText = "Rs " + subtotal.toLocaleString('en-LK', {minimumFractionDigits: 2});
     }
 
-    // Function to add a blank row
     function addRow() {
         const tbody = document.getElementById('tableBody');
-        const newRow = document.createElement('tr');
-        newRow.className = 'item-row';
-        newRow.innerHTML = `
-            <td><div class="editable" contenteditable="true" style="width: 100%; font-weight: bold;">Additional Item</div><div class="editable" contenteditable="true" style="width: 100%; font-size: 0.85em; color: #666;">Description...</div></td>
-            <td><div class="editable qty" contenteditable="true">0</div></td>
-            <td><div class="editable price" contenteditable="true">0.00</div></td>
+        const tr = document.createElement('tr');
+        tr.className = 'item-row';
+        tr.innerHTML = `
+            <td>
+                <div class="editable" contenteditable="true" style="font-weight: 600;">New Delicacy</div>
+                <div class="editable" contenteditable="true" style="font-size: 11px; color: #888;">Item description...</div>
+            </td>
+            <td style="text-align: center;"><div class="editable qty" contenteditable="true">1</div></td>
+            <td style="text-align: right;"><div class="editable price" contenteditable="true">0.00</div></td>
             <td class="col-total">0.00</td>
         `;
-        tbody.appendChild(newRow);
-        // Bind the calculation event to the new row
-        newRow.addEventListener('input', updateTotals);
+        tbody.appendChild(tr);
+        tr.addEventListener('input', updateTotals);
     }
 
-    // Initialize calculation listener
     document.getElementById('quoteTable').addEventListener('input', updateTotals);
 </script>
 
