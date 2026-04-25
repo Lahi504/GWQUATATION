@@ -3,361 +3,317 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Finance Strenght Customer Survey</title>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <title>Golden Whisk - Quotation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@400;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --gold: #d4af37;
+            --dark-gold: #b8860b;
+            --light-cream: #fffdf5;
+            --text-gray: #444;
+        }
+
+        /* General Styling */
         body {
-            font-family: 'Segoe UI', Arial, sans-serif;
-            background: linear-gradient(135deg, #f8fafc 0%, #ffe0c2 100%);
+            font-family: 'Lato', sans-serif;
+            background-color: #e0e0e0;
             margin: 0;
-            padding: 0;
+            padding: 40px 20px;
+            color: var(--text-gray);
         }
-        .container {
-            max-width: 650px;
-            margin: 40px auto;
-            background: #fff;
-            border-radius: 18px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.12);
-            padding: 36px 28px 28px 28px;
-            border: 1px solid #f3a46b;
-        }
-        h1 {
-            text-align: center;
-            color: #FF5F1F;
-            font-size: 2.1em;
-            margin-bottom: 18px;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-        }
-        .form-section {
-            margin-bottom: 32px;
-        }
-        .form-section h2 {
-            color: #FF5F1F;
-            background: linear-gradient(90deg, #ffe0c2 0%, #fff 100%);
-            border-left: 5px solid #FF5F1F;
-            padding: 8px 0 8px 12px;
-            margin-top: 0;
-            border-radius: 6px;
-            font-size: 1.2em;
-        }
-        .customer-details {
-            background: #f7fafd;
-            padding: 18px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 8px rgba(255,95,31,0.07);
-        }
-        .question {
-            margin-bottom: 18px;
-            padding: 14px 12px;
-            background: #fff7f0;
-            border-radius: 7px;
-            box-shadow: 0 1px 4px rgba(255,95,31,0.04);
-            transition: box-shadow 0.2s;
-        }
-        .question:focus-within {
-            box-shadow: 0 2px 8px rgba(255,95,31,0.12);
-        }
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: #2c3e50;
-        }
-        .answers label {
-            display: inline-block;
-            margin-right: 24px;
-            font-weight: 500;
-            color: #FF5F1F;
-        }
-        input[type="text"],
-        input[type="email"],
-        input[type="tel"],
-        input[type="number"],
-        textarea {
-            width: 100%;
-            padding: 10px;
-            border: 1.5px solid #ffd1a6;
-            border-radius: 6px;
+
+        /* The Paper Sheet */
+        .paper {
+            background: white;
+            width: 850px;
+            margin: 0 auto;
+            padding: 70px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            min-height: 1100px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
             box-sizing: border-box;
-            font-size: 1em;
-            background: #fff;
-            transition: border-color 0.2s;
         }
-        input[type="text"]:focus,
-        input[type="email"]:focus,
-        input[type="tel"]:focus,
-        input[type="number"]:focus,
-        textarea:focus {
-            border-color: #FF5F1F;
-            outline: none;
-        }
-        textarea {
-            height: 80px;
-            resize: vertical;
-        }
-        button {
-            background: linear-gradient(90deg, #FF5F1F 0%, #ffb36b 100%);
-            color: #fff;
-            border: none;
-            padding: 14px 32px;
-            border-radius: 7px;
-            font-size: 1.1em;
-            cursor: pointer;
-            margin-top: 10px;
-            font-weight: 600;
-            box-shadow: 0 2px 8px rgba(255,95,31,0.08);
-            transition: background 0.2s, box-shadow 0.2s;
-        }
-        button:hover:not(:disabled) {
-            background: linear-gradient(90deg, #ffb36b 0%, #FF5F1F 100%);
-            box-shadow: 0 4px 16px rgba(255,95,31,0.15);
-        }
-        button:disabled {
-            opacity: 0.7;
-            cursor: not-allowed;
-        }
-        .result {
-            margin: 25px 0 0 0;
-            padding: 18px;
-            border-radius: 10px;
+
+        /* Branding Header */
+        .header {
             text-align: center;
-            font-size: 1.2em;
+            border-bottom: 2px solid var(--gold);
+            padding-bottom: 30px;
+            margin-bottom: 40px;
+        }
+
+        .logo {
+            width: 150px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            color: var(--dark-gold);
+            font-size: 2.5em;
+            letter-spacing: 8px;
+            margin: 10px 0;
+            font-weight: 700;
+        }
+
+        /* Client & Invoice Info */
+        .info-section {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 50px;
+        }
+
+        .info-box strong {
+            color: var(--dark-gold);
+            text-transform: uppercase;
+            font-size: 0.85em;
+        }
+
+        .editable {
+            border-bottom: 1px dashed #ccc;
+            padding: 4px;
+            min-width: 30px;
+            display: inline-block;
+            outline: none;
+            transition: all 0.2s;
+        }
+
+        .editable:focus {
+            border-bottom: 2px solid var(--gold);
+            background: var(--light-cream);
+        }
+
+        /* Table Styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th {
+            background-color: var(--gold);
+            color: white;
+            font-family: 'Playfair Display', serif;
+            padding: 15px;
+            text-align: left;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        td {
+            border-bottom: 1px solid #f0f0f0;
+            padding: 18px 15px;
+            vertical-align: top;
+        }
+
+        .col-total {
             font-weight: bold;
-            box-shadow: 0 2px 8px rgba(44,62,80,0.08);
-        }
-        .result.good {
-            background: linear-gradient(90deg, #4CAF50 0%, #a8e063 100%);
-            color: #fff;
-        }
-        .result.mid {
-            background: linear-gradient(90deg, #FFC107 0%, #ffe082 100%);
+            text-align: right;
             color: #222;
         }
-        .result.bad {
-            background: linear-gradient(90deg, #F44336 0%, #ff7961 100%);
-            color: #fff;
+
+        /* Totals Area */
+        .grand-total-wrapper {
+            text-align: right;
+            font-size: 1.8em;
+            color: var(--dark-gold);
+            margin-top: 20px;
+            border-top: 3px double var(--gold);
+            padding-top: 15px;
+            font-family: 'Playfair Display', serif;
+            font-weight: bold;
+        }
+
+        /* Terms & Signatures */
+        .terms-section {
+            margin-top: 50px;
+            font-size: 0.9em;
+            line-height: 1.6;
+        }
+
+        .terms-section h3 {
+            color: var(--dark-gold);
+            border-bottom: 1px solid var(--gold);
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .signature-section {
+            margin-top: auto;
+            display: flex;
+            justify-content: space-between;
+            padding-top: 60px;
+        }
+
+        .sig-box {
+            width: 40%;
+            border-top: 1px solid #444;
+            text-align: center;
+            padding-top: 10px;
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+        }
+
+        /* Control Buttons (Floating) */
+        .controls {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            z-index: 1000;
+        }
+
+        .btn {
+            padding: 14px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            color: white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: transform 0.2s, background 0.2s;
+            font-family: 'Lato', sans-serif;
+            text-transform: uppercase;
+            font-size: 0.8em;
+        }
+
+        .btn-download { background: #222; }
+        .btn-add { background: var(--dark-gold); }
+        .btn:hover { transform: scale(1.05); }
+
+        /* Print Mode Optimizations */
+        @media print {
+            .controls { display: none; }
+            body { background: white; padding: 0; }
+            .paper { 
+                box-shadow: none; 
+                margin: 0; 
+                width: 100%; 
+                padding: 40px; 
+                min-height: 100vh;
+            }
+            .editable { border-bottom: none; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1><b>ඔබගේ මූල්‍ය තත්වය ඔබගේ අනාගතය සදහා කෙතරම් සූදානම් ද?</b>, යන්න සොයා බලමු.</h1>
-        <form id="survey-form">
-            <div class="form-section">
-                <h2>Add Your Details</h2>
-                <div class="customer-details">
-                    <div class="question">
-                        <label for="customer-name">Full Name:</label>
-                        <input type="text" id="customer-name" name="customer-name" required>
-                    </div>
-                    <div class="question">
-                        <label for="customer-email">Email:</label>
-                        <input type="email" id="customer-email" name="customer-email" required>
-                    </div>
-                    <div class="question">
-                        <label for="customer-phone">Phone Number:</label>
-                        <input type="tel" id="customer-phone" name="customer-phone" required>
-                    </div>
-                    <div class="question">
-                        <label for="customer-age">Age:</label>
-                        <input type="number" id="customer-age" name="customer-age" min="18" max="100" required>
-                    </div>
-                
-                </div>
-            </div>
 
-            <div class="form-section">
-                <h2>සමීක්ෂණ ප්‍රශ්ණ</h2>
-                <div class="question">
-                    <label>1. ඔබගේ වාර්ෂික ආදායම වගේ දහගුණයක ජීවිත රක්ෂණයක් ඔබ සතුව තිබේ ද?</label>
-                    <div class="answers">
-                        <label><input type="radio" name="q1" value="yes" required> Yes</label>
-                        <label><input type="radio" name="q1" value="no"> No</label>
-                    </div>
-                </div>
-                <div class="question">
-                    <label>2. අසාද්‍ය රෝගයකදී වියදම් කිරීමට ඔබගේ වාර්ෂික ආදායම මෙන් දෙගුණයක අරමුදලක් ඔබ සතුව තිබේ ද?</label>
-                    <div class="answers">
-                        <label><input type="radio" name="q2" value="yes" required> Yes</label>
-                        <label><input type="radio" name="q2" value="no"> No</label>
-                    </div>
-                </div>
-                <div class="question">
-                    <label>3. නොසිතූ වෙලාවකදී අසාද්‍ය රෝගී තත්වයකට හෝ සදාකාලික ආබාදයකට මුහුණ දීමට සිදුවුවහොත් අවම වශයෙන් මාස හයක කාලයක් සදහා වියදම් කළමණාකරණය කිරීම සදහා ඔබ සතුව අරමුදලක් තිබේ ද?</label>
-                    <div class="answers">
-                        <label><input type="radio" name="q3" value="yes" required> Yes</label>
-                        <label><input type="radio" name="q3" value="no"> No</label>
-                    </div>
-                </div>
-                <div class="question">
-                    <label>4. ඔබ හෝ ඔබගේ පවුලේ සමාජිකයන්ගේ හදිසි රෝහල් ගත වීමකදී වියදම් කිරීම සදහා ඔබ සතු ඉතිරි කර ඇති මුදල් අවශ්‍ය නොවේ.</label>
-                    <div class="answers">
-                        <label><input type="radio" name="q4" value="yes" required> Yes</label>
-                        <label><input type="radio" name="q4" value="no"> No</label>
-                    </div>
-                </div>
-                <div class="question">
-                    <label>5. ඔබ ඔබගේ දරුවාගේ උසස් අද්‍යාපනය සහ අනාගතය වෙනුවෙන් සැලසුම් දැනටමත් සකස්කර ඇත් ද?</label>
-                    <div class="answers">
-                        <label><input type="radio" name="q5" value="yes" required> Yes</label>
-                        <label><input type="radio" name="q5" value="no"> No</label>
-                    </div>
-                </div>
-                <div class="question">
-                    <label>6. ඔබගේ විශ්‍රාමය වෙනුවෙන් මේ වනවිට ඔබගේ වාර්ෂික ආදායම වගේ 10 ගුණයක අරමුදලක් සැලසුම් කර ඇත් ද?</label>
-                    <div class="answers">
-                        <label><input type="radio" name="q6" value="yes" required> Yes</label>
-                        <label><input type="radio" name="q6" value="no"> No</label>
-                    </div>
-                </div>
-                <div class="question">
-                    <label>7. ඔබ හදිසියේ මියගියහොත් හෝ ඔබට ඇතිවන සදාකාලික ආබාදිත තත්වයකදී නිවාස ණය ඇතුලු සියලුම වගකීම් වලින් සම්පූර්ණයෙන්ම නිදහස් වීමට මට හැකියාව තිබේද?</label>
-                    <div class="answers">
-                        <label><input type="radio" name="q7" value="yes" required> Yes</label>
-                        <label><input type="radio" name="q7" value="no"> No</label>
-                    </div>
-                </div>
-                <div class="question">
-                    <label>8. ඔබගේ රැකියාව අහිමි වුවහොත්, ඔබගේ මාසික වියදම් අවම වශයෙන් මාස 6ක් සදහා සැපයීමට ප්‍රමාණවත් ඉතුරුමක් ඔබ සතුව ඇත් ද?</label>
-                    <div class="answers">
-                        <label><input type="radio" name="q8" value="yes" required> Yes</label>
-                        <label><input type="radio" name="q8" value="no"> No</label>
-                    </div>
-                </div>
-                <div class="question">
-                    <label>9. ඔබගේ නිවස විකිණීමට සිදුවුවහොත් එහි උකස ගෙවීමට තරම් ප්‍රමාණවත් මුදලක් ඔබ සතුව තිබේ ද?</label>
-                    <div class="answers">
-                        <label><input type="radio" name="q9" value="yes" required> Yes</label>
-                        <label><input type="radio" name="q9" value="no"> No</label>
-                    </div>
-                </div>
-                <div class="question">
-                    <label>10. ඔබගේ මූල්‍ය කලමණාකරණය කිරීම සදහා විශ්වාස වන්ත මූල්‍ය උපදේශකවරයකු ඔබ හට සිටීද?</label>
-                    <div class="answers">
-                        <label><input type="radio" name="q10" value="yes" required> Yes</label>
-                        <label><input type="radio" name="q10" value="no"> No</label>
-                    </div>
-                </div>
-            </div>
+<div class="controls">
+    <button class="btn btn-download" onclick="window.print()">Download as PDF</button>
+    <button class="btn btn-add" onclick="addRow()">+ Add New Item</button>
+</div>
 
-            <!-- Hidden advisor information for backend/email only -->
-            <input type="hidden" id="advisor-name" name="advisor-name" value="Lahiru Sahan">
-            <input type="hidden" id="advisor-email" name="advisor-email" value="lahirusahanofficial@gmail.com">
-            <input type="hidden" id="advisor-phone" name="advisor-phone" value="0725121120">
-            <div class="question">
-                <label for="comments">Comments:</label>
-                <textarea id="comments" name="comments" readonly>සමීක්ෂණය සම්පූර්ණ කිරීම ගැන ඔබට ස්තූතියි. ඔබගේ අදහස් ඉතා වටිනා අතර අපගේ සේවාවන් වැඩිදියුණු කිරීමට උපකාරී වනු ඇත. මූල්‍ය හා රක්ෂණ පිළිබඳ වැඩිදුර තොරතුරු ලබා ගැනීමට ඔබට අවශ්‍ය නම් කරුණාකර මාව සම්බන්ධ කරගන්න. මගේ සම්බන්ධතා තොරතුරු ඉහත දක්වා ඇති ඔබගේ විද්‍යුත් තැපැල් ලිපිනයට මාරු කරනු ලැබෙනු ඇත.</textarea>
-            </div>
-
-            <button type="submit" id="submit-btn">Submit Survey</button>
-        </form>
-        <div id="result-message" class="result" style="display:none;"></div>
+<div class="paper">
+    <div class="header">
+        <img src="C:\Users\lahir\Desktop\New folder\WhatsApp_Image_2026-02-14_at_17.52.57-removebg-preview.png" alt="Golden Whisk Logo" class="logo">
+        <h1>QUOTATION</h1>
+        <p style="font-style: italic; color: var(--dark-gold); letter-spacing: 2px;">Bespoke Cakes & Fine Confections</p>
     </div>
-    <script>
-        // Initialize EmailJS (replace with your public key)
-        emailjs.init('CakL-A4OcK1-RGboq');
 
-        document.getElementById('survey-form').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            const form = e.target;
-            let yesCount = 0;
-            const questions = [
-                'මාගේ වාර්ෂික ආදායම වගේ දහගුණයක ජීවිත රක්ෂණයක් මා සතුව ඇත.',
-                'අසාද්‍ය රෝගයකදී වියදම් කිරීමට මාගේ වාර්ෂික ආදායම මෙන් දෙගුණයක අරමුදලක් මා සතුව ඇත.',
-                'නොසිතූ වෙලාවකදී අසාද්‍ය රෝගී තත්වයකට හෝ සදාකාලික ආබාදයකට මුහුණ දීමට සිදුවුවහොත් අවම වශයෙන් මාස හයක කාලයක් සදහා වියදම් කළමණාකරණය කිරීම සදහා මා සතුව අරමුදලක් ඇත.',
-                'මම හෝ මගේ පවුලේ සමාජිකයන්ගේ හදිසි රෝහල් ගත වීමකදී වියදම් කිරීම සදහා මා සතු ඉතිරි කර ඇති මුදල් අවශ්‍ය නොවේ.',
-                'මම මගේ දරුවාගේ උසස් අද්‍යාපනය සහ අනාගතය වෙනුවෙන් සැලසුම් කර ඇත.',
-                'මගේ විශ්‍රාමය වෙනුවෙන් මේ වනවිට මගේ වාර්ෂික ආදායම වගේ 10 ගුණයක අරමුදලක් සැලසුම් කර ඇත.',
-                'මාගේ හදිසි මරණයකදී හෝ සදාකාලික ආබාදිත තත්වයකදී නිවාස ණය ඇතුලු සියලුම වගකීම් වලින් සම්පූර්ණයෙන්ම නිදහස් වීමට මට හැකියාව ඇත.',
-                'මගේ රැකියාව අහිමි වුවහොත්, මගේ මාසික වියදම් අවම වශයෙන් මාස 6ක් සදහා සැපයීමට ප්‍රමාණවත් ඉතුරුමක් මා සතුව ඇත.',
-                'මගේ නිවස විකිණීමට සිදුවුවහොත් එහි උකස ගෙවීමට තරම් ප්‍රමාණවත් මුදලක් මා සතුව ඇත.',
-                'මගේ මූල්‍ය කලමණාකරණය කිරීම සදහා විශ්වාස වන්ත මූල්‍ය උපදේශකවරයකු මා හට සිටී.'
-            ];
-            let answers = {};
-            let questionAnswerList = '';
-            for (let i = 1; i <= 10; i++) {
-                const val = form[`q${i}`].value;
-                answers[`q${i}`] = val;
-                questionAnswerList += `${i}. ${questions[i-1]}: ${val}\n`;
-                if (val === 'yes') yesCount++;
-            }
-            
-            // Collect customer details
-            const customerName = form['customer-name'].value;
-            const customerEmail = form['customer-email'].value;
-            const customerPhone = form['customer-phone'].value;
-            const customerAge = form['customer-age'].value;
-            
-            
-            // Collect advisor details
-            const advisorName = form['advisor-name'].value;
-            const advisorEmail = form['advisor-email'].value;
-            const advisorPhone = form['advisor-phone'].value;
-            const comments = form['comments'].value;
-            
-            // Color code logic
-            let resultClass = 'good';
-            let resultText = 'Excellent! Most answers are positive.';
-            if (yesCount <= 4) {
-                resultClass = 'bad';
-                resultText = 'We are sorry! Most answers are negative.';
-            } else if (yesCount <= 7) {
-                resultClass = 'mid';
-                resultText = 'Thank you! Your feedback is mixed.';
-            }
-            const resultDiv = document.getElementById('result-message');
-            resultDiv.className = 'result ' + resultClass;
-            resultDiv.textContent = `Yes: ${yesCount} / 10. ${resultText}`;
-            resultDiv.style.display = 'block';
-            
-            // Send survey info to email
-            try {
-                await emailjs.send(
-                    'service_7z111vz',
-                    'template_vji63cd',
-                    {
-                        customer_name: customerName,
-                        customer_email: customerEmail,
-                        advisor_name: advisorName,
-                        advisor_email: advisorEmail,
-                        advisor_phone: advisorPhone,
-                        comments: comments,
-                        yes_count: yesCount,
-                        answers: JSON.stringify(answers, null, 2),
-                        submission_date: new Date().toLocaleString(),
-                        question_answer_list: questionAnswerList
-                    }
-                );
-                resultDiv.textContent += '\nSurvey sent to advisor!';
+    <div class="info-section">
+        <div class="info-box">
+            <strong>Prepared For</strong><br>
+            <div class="editable" contenteditable="true" style="width: 280px; font-size: 1.1em;">[Customer Name]</div><br>
+            <div class="editable" contenteditable="true" style="width: 280px; font-size: 0.9em;">[Phone / Event Location]</div>
+        </div>
+        <div class="info-box" style="text-align: right;">
+            <strong>Quote Details</strong><br>
+            Date: <span class="editable" contenteditable="true">February 14, 2026</span><br>
+            Quote No: <span class="editable" contenteditable="true">GW-2026-001</span>
+        </div>
+    </div>
 
-                await emailjs.send(
-                    'service_7z111vz',
-                    'template_7o5dvq8',
-                    {
-                        advisor_email: advisorEmail,
-                        customer_name: customerName,
-                        customer_email: customerEmail,
-                        customer_phone: customerPhone,
-                        customer_age: customerAge,
-                        
-                        
-                        comments: comments,
-                        yes_count: yesCount,
-                        answers: JSON.stringify(answers, null, 2),
-                        submission_date: new Date().toLocaleString(),
-                        question_answer_list: questionAnswerList
-                    }
-                );
-                resultDiv.textContent += '\nSurvey sent to advisor!';
-            } catch (err) {
-                resultDiv.textContent += `\nFailed to send survey. Error: ${err?.text || err?.message || err}`;
-                alert('EmailJS error: ' + (err?.text || err?.message || err));
-                console.error('EmailJS error details:', err);
-            }
-            document.getElementById('submit-btn').disabled = true;
+    <table id="quoteTable">
+        <thead>
+            <tr>
+                <th>Description</th>
+                <th style="width: 60px;">Qty</th>
+                <th style="width: 120px;">Price (Rs)</th>
+                <th style="width: 120px; text-align: right;">Total (Rs)</th>
+            </tr>
+        </thead>
+        <tbody id="tableBody">
+            <tr class="item-row">
+                <td><div class="editable" contenteditable="true" style="width: 100%; font-weight: bold;">Custom Signature Cake</div><div class="editable" contenteditable="true" style="width: 100%; font-size: 0.85em; color: #666;">Enter flavor and size details here...</div></td>
+                <td><div class="editable qty" contenteditable="true">1</div></td>
+                <td><div class="editable price" contenteditable="true">0.00</div></td>
+                <td class="col-total">0.00</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="grand-total-wrapper">
+        GRAND TOTAL: Rs<span id="grandTotal">0.00</span>
+    </div>
+
+    <div class="terms-section">
+        <h3>Terms & Conditions</h3>
+        <p>
+            • A <strong>50% non-refundable deposit</strong> is required to secure your booking date.<br>
+            • Final balance must be settled <strong>7 days</strong> before the event.<br>
+            • Product may contain or come into contact with <strong>dairy, wheat, or nuts</strong>.
+        </p>
+    </div>
+
+    <div class="signature-section">
+        <div class="sig-box">
+            <span style="font-weight: bold;">Golden Whisk</span><br>
+            <span style="font-size: 0.8em; color: #888;">Authorized Representative</span><br>
+            <span style="font-size: 0.8em; color: #888;">D Anthony</span>
+        </div>
+        <div class="sig-box">
+            <span style="font-weight: bold;">Client Acceptance</span><br>
+            <span style="font-size: 0.8em; color: #888;">Signature & Date</span>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Logic to calculate math automatically
+    function updateTotals() {
+        let grandTotal = 0;
+        const rows = document.querySelectorAll('.item-row');
+        
+        rows.forEach(row => {
+            // Clean text input to extract numbers only
+            const qtyText = row.querySelector('.qty').innerText.replace(/[^0-9.]/g, '');
+            const priceText = row.querySelector('.price').innerText.replace(/[^0-9.]/g, '');
+            
+            const qty = parseFloat(qtyText) || 0;
+            const price = parseFloat(priceText) || 0;
+            const total = qty * price;
+            
+            row.querySelector('.col-total').innerText = total.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            grandTotal += total;
         });
-    </script>
+        
+        document.getElementById('grandTotal').innerText = grandTotal.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+    }
+
+    // Function to add a blank row
+    function addRow() {
+        const tbody = document.getElementById('tableBody');
+        const newRow = document.createElement('tr');
+        newRow.className = 'item-row';
+        newRow.innerHTML = `
+            <td><div class="editable" contenteditable="true" style="width: 100%; font-weight: bold;">Additional Item</div><div class="editable" contenteditable="true" style="width: 100%; font-size: 0.85em; color: #666;">Description...</div></td>
+            <td><div class="editable qty" contenteditable="true">0</div></td>
+            <td><div class="editable price" contenteditable="true">0.00</div></td>
+            <td class="col-total">0.00</td>
+        `;
+        tbody.appendChild(newRow);
+        // Bind the calculation event to the new row
+        newRow.addEventListener('input', updateTotals);
+    }
+
+    // Initialize calculation listener
+    document.getElementById('quoteTable').addEventListener('input', updateTotals);
+</script>
+
 </body>
 </html>
