@@ -11,6 +11,7 @@
             --dark-gold: #8e6d2f;
             --light-cream: #fdfaf4;
             --text-main: #2c2c2c;
+            --remove-red: #e74c3c;
         }
 
         body {
@@ -46,10 +47,7 @@
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
 
-        .btn:hover {
-            background: var(--gold);
-            color: white;
-        }
+        .btn:hover { background: var(--gold); color: white; }
 
         /* A4 Paper Styling */
         .paper {
@@ -80,11 +78,7 @@
             pointer-events: none;
         }
 
-        .header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
+        .header { text-align: center; margin-bottom: 40px; }
         .logo { width: 110px; margin-bottom: 10px; }
 
         h1 {
@@ -120,22 +114,10 @@
             margin-bottom: 5px;
         }
 
-        .editable {
-            outline: none;
-            border-bottom: 1px solid transparent;
-        }
+        .editable { outline: none; border-bottom: 1px solid transparent; }
+        .editable:focus { border-bottom: 1px solid var(--gold); background: var(--light-cream); }
 
-        .editable:focus {
-            border-bottom: 1px solid var(--gold);
-            background: var(--light-cream);
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-        }
-
+        table { width: 100%; border-collapse: collapse; margin-bottom: 20px; position: relative; }
         th {
             font-family: 'Playfair Display', serif;
             text-transform: uppercase;
@@ -147,30 +129,23 @@
             text-align: left;
         }
 
-        td {
-            padding: 12px;
-            border-bottom: 1px solid #f9f9f9;
-            font-size: 13px;
-        }
+        td { padding: 12px; border-bottom: 1px solid #f9f9f9; font-size: 13px; vertical-align: top; }
 
-        /* Totals Layout */
-        .summary-container {
-            display: flex;
-            justify-content: flex-end;
-            margin-top: 20px;
+        /* Remove Button Style */
+        .remove-btn {
+            color: var(--remove-red);
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 18px;
+            padding: 0 10px;
+            user-select: none;
+            transition: 0.2s;
         }
+        .remove-btn:hover { transform: scale(1.2); }
 
-        .summary-table {
-            width: 280px;
-        }
-
-        .summary-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 8px 0;
-            font-size: 13px;
-        }
-
+        .summary-container { display: flex; justify-content: flex-end; margin-top: 20px; }
+        .summary-table { width: 280px; }
+        .summary-row { display: flex; justify-content: space-between; padding: 8px 0; font-size: 13px; }
         .summary-row.grand-total {
             border-top: 2px solid var(--gold);
             margin-top: 10px;
@@ -181,22 +156,9 @@
             color: var(--dark-gold);
         }
 
-        .footer-area {
-            margin-top: 50px;
-        }
-
-        .terms {
-            font-size: 10px;
-            color: #999;
-            line-height: 1.6;
-            margin-bottom: 40px;
-        }
-
-        .signatures {
-            display: flex;
-            justify-content: space-between;
-        }
-
+        .footer-area { margin-top: 50px; }
+        .terms { font-size: 10px; color: #999; line-height: 1.6; margin-bottom: 40px; }
+        .signatures { display: flex; justify-content: space-between; }
         .sig-line {
             width: 200px;
             border-top: 1px solid var(--gold);
@@ -210,14 +172,8 @@
         @media print {
             @page { size: A4; margin: 0; }
             body { background: white; padding: 0; }
-            .controls { display: none; }
-            .paper {
-                box-shadow: none;
-                width: 210mm;
-                height: 297mm;
-                transform: scale(1);
-                transform-origin: top;
-            }
+            .controls, .remove-btn, .col-action { display: none !important; }
+            .paper { box-shadow: none; width: 210mm; height: 297mm; }
         }
     </style>
 </head>
@@ -251,7 +207,8 @@
     <table id="quoteTable">
         <thead>
             <tr>
-                <th style="width: 55%;">Item Description</th>
+                <th class="col-action" style="width: 40px;"></th>
+                <th style="width: 50%;">Item Description</th>
                 <th style="text-align: center;">Qty</th>
                 <th style="text-align: right;">Price (Rs.)</th>
                 <th style="text-align: right;">Total</th>
@@ -259,6 +216,7 @@
         </thead>
         <tbody id="tableBody">
             <tr class="item-row">
+                <td class="col-action"><span class="remove-btn" onclick="removeRow(this)">×</span></td>
                 <td>
                     <div class="editable" contenteditable="true" style="font-weight: 600;">Custom Celebration Cake</div>
                     <div class="editable" contenteditable="true" style="font-size: 11px; color: #999;">Tier details, flavors, and design notes...</div>
@@ -343,6 +301,7 @@
         const tr = document.createElement('tr');
         tr.className = 'item-row';
         tr.innerHTML = `
+            <td class="col-action"><span class="remove-btn" onclick="removeRow(this)">×</span></td>
             <td>
                 <div class="editable" contenteditable="true" style="font-weight: 600;">New Item</div>
                 <div class="editable" contenteditable="true" style="font-size: 11px; color: #999;">Description...</div>
@@ -352,18 +311,22 @@
             <td class="col-total" style="text-align: right; font-weight: 600;">0.00</td>
         `;
         tbody.appendChild(tr);
-        // Bind event to the new row
         tr.addEventListener('input', calculate);
+        calculate();
     }
 
-    // Initialize calculation on any input
+    function removeRow(btn) {
+        const row = btn.closest('tr');
+        row.remove();
+        calculate();
+    }
+
     document.addEventListener('input', (e) => {
         if (e.target.classList.contains('editable')) {
             calculate();
         }
     });
 
-    // Initial calculation
     calculate();
 </script>
 
