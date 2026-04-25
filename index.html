@@ -10,7 +10,6 @@
             --gold: #c5a059;
             --dark-gold: #8e6d2f;
             --light-cream: #fdfaf4;
-            --border-color: #d4af37;
             --text-main: #2c2c2c;
         }
 
@@ -44,6 +43,7 @@
             font-size: 11px;
             letter-spacing: 1px;
             transition: 0.3s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
 
         .btn:hover {
@@ -57,12 +57,10 @@
             width: 210mm;
             min-height: 297mm;
             margin: 0 auto;
-            padding: 45px;
+            padding: 50px;
             box-sizing: border-box;
             position: relative;
             box-shadow: 0 0 20px rgba(0,0,0,0.1);
-            border: 1px solid #eee;
-            overflow: hidden;
         }
 
         /* Luxury Border Frame */
@@ -82,45 +80,39 @@
             pointer-events: none;
         }
 
-        /* Header Area */
         .header {
             text-align: center;
             margin-bottom: 40px;
-            position: relative;
         }
 
-        .logo {
-            width: 120px;
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
-        }
+        .logo { width: 110px; margin-bottom: 10px; }
 
         h1 {
             font-family: 'Playfair Display', serif;
-            font-size: 38px;
-            margin: 15px 0 5px 0;
-            letter-spacing: 5px;
+            font-size: 35px;
+            margin: 0;
+            letter-spacing: 6px;
             color: var(--dark-gold);
             text-transform: uppercase;
         }
 
         .tagline {
             font-style: italic;
-            font-size: 13px;
+            font-size: 11px;
             letter-spacing: 3px;
-            color: #777;
+            color: #888;
             text-transform: uppercase;
         }
 
-        /* Info Section */
         .info-section {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
+            display: flex;
+            justify-content: space-between;
             margin-bottom: 40px;
             padding: 0 10px;
         }
 
         .info-box strong {
-            font-size: 10px;
+            font-size: 9px;
             letter-spacing: 2px;
             text-transform: uppercase;
             color: var(--gold);
@@ -131,7 +123,6 @@
         .editable {
             outline: none;
             border-bottom: 1px solid transparent;
-            transition: 0.2s;
         }
 
         .editable:focus {
@@ -139,77 +130,71 @@
             background: var(--light-cream);
         }
 
-        /* Table Styling */
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
 
         th {
             font-family: 'Playfair Display', serif;
             text-transform: uppercase;
-            font-size: 12px;
+            font-size: 11px;
             letter-spacing: 1px;
-            padding: 15px;
+            padding: 12px;
             border-bottom: 2px solid var(--gold);
             color: var(--dark-gold);
             text-align: left;
         }
 
         td {
-            padding: 15px;
+            padding: 12px;
             border-bottom: 1px solid #f9f9f9;
             font-size: 13px;
         }
 
-        .col-total {
-            text-align: right;
-            font-weight: 600;
+        /* Totals Layout */
+        .summary-container {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 20px;
         }
 
-        /* Grand Total Area */
-        .total-container {
-            float: right;
-            width: 300px;
-            text-align: right;
-            margin-top: 10px;
+        .summary-table {
+            width: 280px;
         }
 
-        .total-row {
+        .summary-row {
             display: flex;
             justify-content: space-between;
-            padding: 10px 0;
-            font-size: 14px;
+            padding: 8px 0;
+            font-size: 13px;
         }
 
-        .grand-total {
+        .summary-row.grand-total {
             border-top: 2px solid var(--gold);
             margin-top: 10px;
             padding-top: 15px;
             font-family: 'Playfair Display', serif;
-            font-size: 24px;
+            font-size: 22px;
             font-weight: 900;
             color: var(--dark-gold);
         }
 
-        /* Footer & Signatures */
         .footer-area {
-            margin-top: 60px;
-            clear: both;
+            margin-top: 50px;
         }
 
         .terms {
-            font-size: 11px;
-            color: #888;
-            line-height: 1.8;
+            font-size: 10px;
+            color: #999;
+            line-height: 1.6;
             margin-bottom: 40px;
         }
 
         .signatures {
             display: flex;
             justify-content: space-between;
-            margin-top: 50px;
         }
 
         .sig-line {
@@ -217,36 +202,21 @@
             border-top: 1px solid var(--gold);
             text-align: center;
             padding-top: 8px;
-            font-size: 10px;
+            font-size: 9px;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            color: #555;
+            color: #666;
         }
 
-        /* Print Scaling Logic */
         @media print {
-            @page {
-                size: A4;
-                margin: 0;
-            }
-            body {
-                background: white;
-                padding: 0;
-            }
-            .controls {
-                display: none;
-            }
+            @page { size: A4; margin: 0; }
+            body { background: white; padding: 0; }
+            .controls { display: none; }
             .paper {
                 box-shadow: none;
-                border: none;
                 width: 210mm;
                 height: 297mm;
-                /* This forces everything to scale down if it overflows */
-                transform: scale(0.98); 
-                transform-origin: top center;
-            }
-            .paper::before, .paper::after {
-                print-color-adjust: exact;
+                transform: scale(1);
+                transform-origin: top;
             }
         }
     </style>
@@ -255,7 +225,7 @@
 
 <div class="controls">
     <button class="btn" onclick="addRow()">+ Add Item</button>
-    <button class="btn" style="background: var(--gold); color: white;" onclick="window.print()">Download PDF</button>
+    <button class="btn" style="background: var(--gold); color: white;" onclick="window.print()">Print Quotation</button>
 </div>
 
 <div class="paper">
@@ -268,22 +238,22 @@
     <div class="info-section">
         <div class="info-box">
             <strong>Client Details</strong>
-            <div class="editable" contenteditable="true" style="font-family: 'Playfair Display'; font-size: 18px;">[Customer Name]</div>
-            <div class="editable" contenteditable="true" style="font-size: 12px; color: #777;">[Phone Number / Event Venue]</div>
+            <div class="editable" contenteditable="true" style="font-family: 'Playfair Display'; font-size: 18px; color: #333;">[Customer Name]</div>
+            <div class="editable" contenteditable="true" style="font-size: 12px; color: #777;">[Event Venue / Contact Number]</div>
         </div>
         <div class="info-box" style="text-align: right;">
-            <strong>Reference</strong>
-            <div style="font-size: 13px;">Date: <span class="editable" contenteditable="true">April 25, 2026</span></div>
-            <div style="font-size: 13px;">Quote #: <span class="editable" contenteditable="true">GW-2026-042</span></div>
+            <strong>Quote Details</strong>
+            <div style="font-size: 12px;">Date: <span class="editable" contenteditable="true">April 25, 2026</span></div>
+            <div style="font-size: 12px;">Quote #: <span class="editable" contenteditable="true">GW-2026-001</span></div>
         </div>
     </div>
 
     <table id="quoteTable">
         <thead>
             <tr>
-                <th style="width: 50%;">Description</th>
+                <th style="width: 55%;">Item Description</th>
                 <th style="text-align: center;">Qty</th>
-                <th style="text-align: right;">Unit Price</th>
+                <th style="text-align: right;">Price (Rs.)</th>
                 <th style="text-align: right;">Total</th>
             </tr>
         </thead>
@@ -291,56 +261,62 @@
             <tr class="item-row">
                 <td>
                     <div class="editable" contenteditable="true" style="font-weight: 600;">Custom Celebration Cake</div>
-                    <div class="editable" contenteditable="true" style="font-size: 11px; color: #888;">Flavors, tiers, and theme details...</div>
+                    <div class="editable" contenteditable="true" style="font-size: 11px; color: #999;">Tier details, flavors, and design notes...</div>
                 </td>
                 <td style="text-align: center;"><div class="editable qty" contenteditable="true">1</div></td>
                 <td style="text-align: right;"><div class="editable price" contenteditable="true">0.00</div></td>
-                <td class="col-total">0.00</td>
+                <td class="col-total" style="text-align: right; font-weight: 600;">0.00</td>
             </tr>
         </tbody>
     </table>
 
-    <div class="total-container">
-        <div class="total-row">
-            <span>Subtotal</span>
-            <span id="subTotal">Rs 0.00</span>
-        </div>
-        <div class="total-row">
-            <span>Delivery Fee</span>
-            <span class="editable" contenteditable="true">0.00</span>
-        </div>
-        <div class="total-row grand-total">
-            <span>Amount Due</span>
-            <span id="grandTotal">Rs 0.00</span>
+    <div class="summary-container">
+        <div class="summary-table">
+            <div class="summary-row">
+                <span>Subtotal</span>
+                <span id="subTotal">0.00</span>
+            </div>
+            <div class="summary-row">
+                <span>Delivery Fee (+)</span>
+                <div class="editable delivery" contenteditable="true" style="border-bottom: 1px dashed var(--gold); min-width: 50px; text-align: right;">0.00</div>
+            </div>
+            <div class="summary-row" style="color: #a00;">
+                <span>Discount (-)</span>
+                <div class="editable discount" contenteditable="true" style="border-bottom: 1px dashed var(--gold); min-width: 50px; text-align: right;">0.00</div>
+            </div>
+            <div class="summary-row grand-total">
+                <span>Amount Due</span>
+                <span id="grandTotal">0.00</span>
+            </div>
         </div>
     </div>
 
     <div class="footer-area">
         <div class="terms">
-            <strong>Terms of Service:</strong><br>
-            • 50% deposit required to confirm dates. • Remaining balance due 7 days prior to delivery.<br>
-            • All cakes are handmade; slight variations may occur. • Contains Gluten, Dairy, and Eggs.
+            <strong>Terms & Conditions:</strong><br>
+            • 50% non-refundable deposit to secure date. • Balance due 7 days prior to event.<br>
+            • Delivery available within specific time windows. • May contain allergens (Nuts/Dairy/Gluten).
         </div>
 
         <div class="signatures">
             <div>
-                <div style="font-family: 'Playfair Display'; font-style: italic; margin-bottom: 5px;">D. Anthony</div>
-                <div class="sig-line">On behalf of Golden Whisk</div>
+                <div style="font-family: 'Playfair Display'; font-style: italic; margin-bottom: 5px; color: var(--dark-gold);">D. Anthony</div>
+                <div class="sig-line">Golden Whisk Founder</div>
             </div>
             <div>
                 <div style="height: 20px;"></div>
-                <div class="sig-line">Client Acceptance</div>
+                <div class="sig-line">Client Acceptance Signature</div>
             </div>
         </div>
     </div>
-    
-    <div style="position: absolute; bottom: 35px; width: calc(100% - 90px); text-align: center; font-size: 9px; color: var(--gold); letter-spacing: 1px;">
+
+    <div style="position: absolute; bottom: 40px; width: calc(100% - 100px); text-align: center; font-size: 9px; color: var(--gold); letter-spacing: 2px; font-weight: 600;">
         INSTAGRAM: GOLDEN_WHISK.LK • WHATSAPP: 077 724 3493
     </div>
 </div>
 
 <script>
-    function updateTotals() {
+    function calculate() {
         let subtotal = 0;
         const rows = document.querySelectorAll('.item-row');
         
@@ -349,13 +325,17 @@
             const price = parseFloat(row.querySelector('.price').innerText.replace(/[^\d.-]/g, '')) || 0;
             const total = qty * price;
             
-            row.querySelector('.col-total').innerText = total.toLocaleString('en-LK', {minimumFractionDigits: 2});
+            row.querySelector('.col-total').innerText = total.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
             subtotal += total;
         });
+
+        const delivery = parseFloat(document.querySelector('.delivery').innerText.replace(/[^\d.-]/g, '')) || 0;
+        const discount = parseFloat(document.querySelector('.discount').innerText.replace(/[^\d.-]/g, '')) || 0;
         
-        document.getElementById('subTotal').innerText = "Rs " + subtotal.toLocaleString('en-LK', {minimumFractionDigits: 2});
-        // You can add delivery logic here if needed, or just let users edit the Grand Total
-        document.getElementById('grandTotal').innerText = "Rs " + subtotal.toLocaleString('en-LK', {minimumFractionDigits: 2});
+        const finalTotal = subtotal + delivery - discount;
+
+        document.getElementById('subTotal').innerText = subtotal.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+        document.getElementById('grandTotal').innerText = finalTotal.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
     }
 
     function addRow() {
@@ -364,18 +344,27 @@
         tr.className = 'item-row';
         tr.innerHTML = `
             <td>
-                <div class="editable" contenteditable="true" style="font-weight: 600;">New Delicacy</div>
-                <div class="editable" contenteditable="true" style="font-size: 11px; color: #888;">Item description...</div>
+                <div class="editable" contenteditable="true" style="font-weight: 600;">New Item</div>
+                <div class="editable" contenteditable="true" style="font-size: 11px; color: #999;">Description...</div>
             </td>
             <td style="text-align: center;"><div class="editable qty" contenteditable="true">1</div></td>
             <td style="text-align: right;"><div class="editable price" contenteditable="true">0.00</div></td>
-            <td class="col-total">0.00</td>
+            <td class="col-total" style="text-align: right; font-weight: 600;">0.00</td>
         `;
         tbody.appendChild(tr);
-        tr.addEventListener('input', updateTotals);
+        // Bind event to the new row
+        tr.addEventListener('input', calculate);
     }
 
-    document.getElementById('quoteTable').addEventListener('input', updateTotals);
+    // Initialize calculation on any input
+    document.addEventListener('input', (e) => {
+        if (e.target.classList.contains('editable')) {
+            calculate();
+        }
+    });
+
+    // Initial calculation
+    calculate();
 </script>
 
 </body>
