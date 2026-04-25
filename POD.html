@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Golden Whisk - Proof of Delivery</title>
+    <style>
+        :root {
+            --gold: #D4AF37;
+            --charcoal: #333333;
+            --light-grey: #f9f9f9;
+        }
+
+        body {
+            font-family: 'Playfair Display', serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            color: var(--charcoal);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 40px;
+            border-top: 8px solid var(--gold);
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-placeholder {
+            width: 80px;
+            height: 80px;
+            background: var(--gold);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 10px;
+        }
+
+        .business-name h1 {
+            margin: 0;
+            font-size: 28px;
+            color: var(--charcoal);
+            letter-spacing: 1px;
+        }
+
+        .pod-label {
+            text-align: right;
+        }
+
+        .pod-label h2 {
+            margin: 0;
+            color: var(--gold);
+            font-size: 22px;
+        }
+
+        .editable-field {
+            border: none;
+            border-bottom: 1px dashed #ccc;
+            width: 100%;
+            padding: 5px;
+            font-family: inherit;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .editable-field:focus {
+            background-color: #fffdec;
+            border-bottom: 1px solid var(--gold);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        td {
+            padding: 12px;
+            border: 1px solid #eee;
+        }
+
+        .label {
+            background-color: var(--light-grey);
+            font-weight: bold;
+            width: 30%;
+        }
+
+        .section-title {
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 16px;
+            text-transform: uppercase;
+            color: var(--gold);
+            font-weight: bold;
+            border-bottom: 1px solid var(--gold);
+            padding-bottom: 5px;
+        }
+
+        .footer {
+            margin-top: 50px;
+            text-align: center;
+            font-size: 12px;
+            color: #888;
+        }
+
+        .signature-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .sig-box {
+            border-top: 1px solid var(--charcoal);
+            text-align: center;
+            padding-top: 10px;
+            margin-top: 60px;
+        }
+
+        .no-print {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .btn {
+            background: var(--gold);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+
+        @media print {
+            .no-print { display: none; }
+            body { padding: 0; background: white; }
+            .container { box-shadow: none; border: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="no-print">
+        <p>Type into the dashed lines to fill out the form. Click Print to save as PDF.</p>
+        <button class="btn" onclick="window.print()">Print / Save as PDF</button>
+    </div>
+
+    <div class="container">
+        <header>
+            <div class="logo-area">
+                <div class="logo-placeholder">LOGO<br>HERE</div>
+                <div class="business-name">
+                    <h1>GOLDEN WHISK</h1>
+                    <small>Artisan Cakes & Confectionery</small>
+                </div>
+            </div>
+            <div class="pod-label">
+                <h2>Proof of Delivery</h2>
+                <p>Order #: <input type="text" class="editable-field" style="width: 80px;" placeholder="GW-001"></p>
+            </div>
+        </header>
+
+        <div class="section-title">Order Details</div>
+        <table>
+            <tr>
+                <td class="label">Customer Name</td>
+                <td><input type="text" class="editable-field" placeholder="Enter name"></td>
+            </tr>
+            <tr>
+                <td class="label">Delivery Address</td>
+                <td><input type="text" class="editable-field" placeholder="Enter delivery address"></td>
+            </tr>
+            <tr>
+                <td class="label">Cake Type</td>
+                <td><input type="text" class="editable-field" placeholder="e.g. Raspberry Pistachio Entremet"></td>
+            </tr>
+        </table>
+
+        <div class="section-title">Delivery Status</div>
+        <table>
+            <tr>
+                <td class="label">Delivery Date</td>
+                <td><input type="date" class="editable-field"></td>
+                <td class="label">Time</td>
+                <td><input type="time" class="editable-field"></td>
+            </tr>
+            <tr>
+                <td class="label">Condition</td>
+                <td colspan="3">
+                    <input type="checkbox"> Perfect Condition &nbsp;&nbsp;
+                    <input type="checkbox"> Temperature Verified &nbsp;&nbsp;
+                </td>
+            </tr>
+        </table>
+
+        <div class="section-title">Special Instructions/Notes</div>
+        <textarea class="editable-field" rows="3" style="width: 98%; border: 1px solid #eee;" placeholder="Add any delivery notes here..."></textarea>
+
+        <div class="signature-grid">
+            <div class="sig-box">
+                Customer Signature
+            </div>
+            <div class="sig-box">
+                Golden Whisk Delivery Lead
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Thank you for choosing Golden Whisk. We hope you enjoy your sweet treat!</p>
+            <p>www.goldenwhisk.wuaze.com/ | +94 77 724 3493</p>
+        </div>
+    </div>
+
+</body>
+</html>
